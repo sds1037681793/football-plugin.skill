@@ -1,0 +1,49 @@
+{
+  "manifest_version": 2,
+  "name": "足球Crow*指数监控插件",
+  "version": "1.0.0",
+  "description": "实时监控titan007.com网站的Crow*指数变化，当波动超过110%时自动抓取数据",
+  "icons": {
+    "16": "icon16.svg",
+    "32": "icon32.svg",
+    "48": "icon48.svg",
+    "128": "icon128.svg"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "https://*.titan007.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://live.titan007.com/indexall.aspx*",
+        "https://live.titan007.com/oldIndexall.aspx*",
+        "https://live.titan007.com/",
+        "https://live.titan007.com/*",
+        "https://live.titan007.com/index.aspx*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "足球Crow*指数监控",
+    "default_icon": {
+      "16": "icon16.svg",
+      "32": "icon32.svg",
+      "48": "icon48.svg",
+      "128": "icon128.svg"
+    }
+  },
+  "options_page": "popup.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  }
+}

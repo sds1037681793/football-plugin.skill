@@ -1,0 +1,360 @@
+/* 弹出窗口样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 400px;
+    min-height: 200px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.container {
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    min-height: 300px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #666;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #95a5a6;
+    animation: pulse 2s infinite;
+}
+
+.status-indicator.active {
+    background-color: #27ae60;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.controls {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.btn {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+    color: white;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #27ae60, #229954);
+    color: white;
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding: 12px;
+    background: rgba(52, 152, 219, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(52, 152, 219, 0.2);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.matches-container {
+    margin-bottom: 16px;
+}
+
+.matches-container h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.matches-list {
+    max-height: 120px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: white;
+    padding: 0;
+}
+
+.match-item { display: none; }
+
+.match-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.match-teams {
+    font-weight: 500;
+    color: #2c3e50;
+    font-size: 13px;
+}
+
+.match-score {
+    font-weight: 600;
+    color: #e74c3c;
+    font-size: 14px;
+}
+
+.match-time {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.crow-changes { display: none; }
+
+/* 紧凑表格样式 */
+.table-compact {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px; /* 缩小字体 */
+}
+.table-compact th,
+.table-compact td {
+    padding: 4px 6px; /* 减少内边距 */
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.table-compact thead th {
+    background: #f7f7f7;
+    font-weight: 600;
+    color: #2c3e50;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+/* 序号标签样式 */
+.index-tag {
+    display: inline-block;
+    padding: 1px 5px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    min-width: 18px;
+    text-align: center;
+}
+.table-compact tbody tr:hover {
+    background: #fafafa;
+}
+
+.crow-change {
+    padding: 6px;
+    border-radius: 4px;
+    background: rgba(46, 204, 113, 0.1);
+    border-left: 3px solid #2ecc71;
+}
+
+.crow-change.negative {
+    background: rgba(231, 76, 60, 0.1);
+    border-left-color: #e74c3c;
+}
+
+.crow-label {
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.crow-values {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.crow-old {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 10px;
+}
+
+.crow-new {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.crow-percent {
+    font-weight: 600;
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    background: #3498db;
+    color: white;
+}
+
+.empty-state {
+    padding: 24px;
+    text-align: center;
+    color: #666;
+}
+
+.empty-state p {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.empty-state small {
+    font-size: 11px;
+    color: #999;
+}
+
+.settings {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 16px;
+}
+
+.settings h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.setting-item label {
+    color: #666;
+    font-weight: 500;
+}
+
+.setting-item input,
+.setting-item select {
+    width: 80px;
+    padding: 4px 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 12px;
+    background: white;
+}
+
+.setting-item input:focus,
+.setting-item select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* 滚动条样式 */
+.matches-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.matches-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.matches-list::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.matches-list::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* 响应式设计 */
+@media (max-width: 350px) {
+    body {
+        width: 350px;
+    }
+    
+    .controls {
+        flex-direction: column;
+    }
+    
+    .stats {
+        flex-direction: column;
+        gap: 8px;
+    }
+}

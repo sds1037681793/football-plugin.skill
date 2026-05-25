@@ -1,0 +1,44 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="ballGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#5dade2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3498db;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- 足球背景 -->
+  <circle cx="64" cy="64" r="56" fill="url(#grad4)" stroke="#2c3e50" stroke-width="3"/>
+  <circle cx="64" cy="64" r="52" fill="url(#ballGrad)" opacity="0.3"/>
+  
+  <!-- 足球花纹 -->
+  <path d="M64 16 L64 112 M16 64 L112 64" stroke="#ffffff" stroke-width="3" opacity="0.9"/>
+  <path d="M32 32 L96 96 M96 32 L32 96" stroke="#ffffff" stroke-width="3" opacity="0.7"/>
+  <circle cx="64" cy="64" r="8" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.8"/>
+  
+  <!-- 五边形花纹 -->
+  <path d="M64 32 L72 40 L68 50 L60 50 L56 40 Z" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <path d="M64 96 L56 88 L60 78 L68 78 L72 88 Z" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <path d="M32 64 L40 56 L50 60 L50 68 L40 72 Z" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <path d="M96 64 L88 72 L78 68 L78 60 L88 56 Z" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.6"/>
+  
+  <!-- 变化箭头 -->
+  <path d="M80 48 L88 32 L96 48" stroke="#e74c3c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M48 80 L32 96 L48 112" stroke="#27ae60" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- 数据点 -->
+  <circle cx="88" cy="32" r="3" fill="#e74c3c"/>
+  <circle cx="32" cy="96" r="3" fill="#27ae60"/>
+  
+  <!-- 装饰性元素 -->
+  <circle cx="88" cy="96" r="2" fill="#f39c12" opacity="0.9"/>
+  <circle cx="32" cy="32" r="2" fill="#f39c12" opacity="0.9"/>
+  <circle cx="64" cy="24" r="1.5" fill="#9b59b6" opacity="0.8"/>
+  <circle cx="64" cy="104" r="1.5" fill="#9b59b6" opacity="0.8"/>
+  
+  <!-- 高光效果 -->
+  <circle cx="50" cy="40" r="6" fill="#ffffff" opacity="0.2"/>
+</svg>

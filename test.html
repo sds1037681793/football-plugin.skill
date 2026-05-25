@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>足球Crow*指数监控插件 - 测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .match-row {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        .match-row:hover {
+            background-color: #f9f9f9;
+        }
+        .match-cell {
+            padding: 5px 10px;
+            text-align: center;
+            min-width: 60px;
+        }
+        .team-name {
+            font-weight: bold;
+            color: #333;
+        }
+        .crow-index {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .crow-index.away {
+            color: #27ae60;
+        }
+        .test-controls {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 8px 16px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-section">
+        <h1>足球Crow*指数监控插件 - 测试页面</h1>
+        <p>这个页面模拟了titan007.com的比赛数据表格结构，用于测试插件功能。</p>
+        
+        <div class="test-controls">
+            <button onclick="simulateCrowChange()">模拟Crow*指数变化</button>
+            <button onclick="addNewMatch()">添加新比赛</button>
+            <button onclick="resetData()">重置数据</button>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>模拟比赛数据</h2>
+        <div id="matches-container">
+            <!-- 模拟比赛数据将在这里显示 -->
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>测试说明</h2>
+        <ul>
+            <li>点击"模拟Crow*指数变化"按钮来测试插件的变化检测功能</li>
+            <li>插件应该能够识别Crow*指数的变化并记录超过阈值的变化</li>
+            <li>点击"添加新比赛"来模拟新比赛的加入</li>
+            <li>点击"重置数据"来清空所有测试数据</li>
+        </ul>
+    </div>
+
+    <script>
+        // 模拟比赛数据
+        let matches = [
+            {
+                id: 1,
+                time: '19:30',
+                status: '进行中',
+                homeTeam: '帕尔马',
+                awayTeam: '热那亚',
+                homeScore: 0,
+                awayScore: 0,
+                crowHome: 0.85,
+                crowAway: 0.94
+            },
+            {
+                id: 2,
+                time: '20:30',
+                status: '进行中',
+                homeTeam: '波鸿',
+                awayTeam: '达姆斯塔特',
+                homeScore: 3,
+                awayScore: 3,
+                crowHome: 1.09,
+                crowAway: 0.96
+            },
+            {
+                id: 3,
+                time: '21:00',
+                status: '进行中',
+                homeTeam: '赫塔费',
+                awayTeam: '华伦西亚',
+                homeScore: 0,
+                awayScore: 1,
+                crowHome: 1.14,
+                crowAway: 0.90
+            }
+        ];
+
+        // 渲染比赛数据
+        function renderMatches() {
+            const container = document.getElementById('matches-container');
+            container.innerHTML = '';
+
+            matches.forEach(match => {
+                const row = document.createElement('div');
+                row.className = 'match-row';
+                row.setAttribute('onclick', `analysis(${match.id})`);
+                
+                row.innerHTML = `
+                    <div class="match-cell">${match.time}</div>
+                    <div class="match-cell">${match.status}</div>
+                    <div class="match-cell team-name">${match.homeTeam}</div>
+                    <div class="match-cell">${match.homeScore}</div>
+                    <div class="match-cell">${match.awayScore}</div>
+                    <div class="match-cell team-name">${match.awayTeam}</div>
+                    <div class="match-cell crow-index">${match.crowHome.toFixed(2)}</div>
+                    <div class="match-cell crow-index away">${match.crowAway.toFixed(2)}*</div>
+                    <div class="match-cell">析 亚 大 欧</div>
+                `;
+                
+                container.appendChild(row);
+            });
+        }
+
+        // 模拟Crow*指数变化
+        function simulateCrowChange() {
+            const randomMatch = matches[Math.floor(Math.random() * matches.length)];
+            const changeType = Math.random() > 0.5 ? 'home' : 'away';
+            const changeAmount = (Math.random() - 0.5) * 0.3; // -0.15 到 +0.15 的变化
+            
+            if (changeType === 'home') {
+                randomMatch.crowHome += changeAmount;
+                randomMatch.crowHome = Math.max(0.1, randomMatch.crowHome); // 确保不为负数
+            } else {
+                randomMatch.crowAway += changeAmount;
+                randomMatch.crowAway = Math.max(0.1, randomMatch.crowAway);
+            }
+            
+            renderMatches();
+            
+            // 显示变化信息
+            const changePercent = Math.abs(changeAmount / (changeType === 'home' ? 
+                (randomMatch.crowHome - changeAmount) : (randomMatch.crowAway - changeAmount)) * 100);
+            
+            alert(`模拟变化：${randomMatch.homeTeam} vs ${randomMatch.awayTeam}\n` +
+                  `${changeType === 'home' ? '主胜' : '客胜'} Crow*指数变化：${(changeAmount >= 0 ? '+' : '')}${changeAmount.toFixed(3)}\n` +
+                  `变化幅度：${changePercent.toFixed(1)}%`);
+        }
+
+        // 添加新比赛
+        function addNewMatch() {
+            const teams = [
+                ['皇家马德里', '巴塞罗那'],
+                ['曼城', '利物浦'],
+                ['拜仁慕尼黑', '多特蒙德'],
+                ['尤文图斯', 'AC米兰'],
+                ['巴黎圣日耳曼', '马赛']
+            ];
+            
+            const randomTeams = teams[Math.floor(Math.random() * teams.length)];
+            const newMatch = {
+                id: matches.length + 1,
+                time: `${Math.floor(Math.random() * 24).toString().padStart(2, '0')}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
+                status: '未开始',
+                homeTeam: randomTeams[0],
+                awayTeam: randomTeams[1],
+                homeScore: 0,
+                awayScore: 0,
+                crowHome: 0.8 + Math.random() * 0.4,
+                crowAway: 0.8 + Math.random() * 0.4
+            };
+            
+            matches.push(newMatch);
+            renderMatches();
+            alert(`添加新比赛：${newMatch.homeTeam} vs ${newMatch.awayTeam}`);
+        }
+
+        // 重置数据
+        function resetData() {
+            if (confirm('确定要重置所有测试数据吗？')) {
+                matches = [];
+                renderMatches();
+            }
+        }
+
+        // 初始化
+        renderMatches();
+
+        // 模拟定时更新（每5秒）
+        setInterval(() => {
+            if (Math.random() > 0.7) { // 30% 概率发生随机变化
+                simulateCrowChange();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

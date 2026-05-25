@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>足球Crow*指数监控</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>足球Crow*指数监控</h1>
+            <div class="status">
+                <span id="status-indicator" class="status-indicator"></span>
+                <span id="status-text">等待数据...</span>
+            </div>
+        </header>
+
+        <div class="controls">
+            <button id="refresh-btn" class="btn btn-primary">
+                <span class="icon">🔄</span> 刷新
+            </button>
+            <button id="clear-btn" class="btn btn-secondary">
+                <span class="icon">🗑️</span> 清空
+            </button>
+            <button id="export-btn" class="btn btn-success">
+                <span class="icon">📊</span> 导出
+            </button>
+        </div>
+
+        <!-- <div class="stats">
+            <div class="stat-item">
+                <span class="stat-label">活跃比赛:</span>
+                <span id="active-count" class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">总变化数:</span>
+                <span id="total-changes" class="stat-value">0</span>
+            </div>
+        </div> -->
+
+        <!-- <div class="matches-container">
+            <h3>监控的比赛</h3>
+            <div id="matches-list" class="matches-list">
+                <div class="empty-state">
+                    <p>暂无监控数据</p>
+                    <small>当Crow*指数变化超过设定阈值时，比赛将自动显示在这里</small>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="settings">
+            <h4>设置</h4>
+
+            <!-- 检测模式选择 -->
+            <div class="setting-item mode-selector">
+                <label>检测模式:</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" style="width: 20px;" name="detection-mode" value="percentage" id="mode-percentage" checked>
+                        <span>百分比模式</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio"  style="width: 20px;" name="detection-mode" value="absolute" id="mode-absolute">
+                        <span>数值差模式</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 百分比模式设置 -->
+            <div id="percentage-settings">
+                <div class="setting-item">
+                    <label for="threshold-asian">让球阈值 (%):</label>
+                    <input type="number" id="threshold-asian" value="0.1" min="0.01" max="200" step="0.01">
+                </div>
+                <div class="setting-item">
+                    <label for="threshold-total">大小球阈值 (%):</label>
+                    <input type="number" id="threshold-total" value="0.1" min="0.01" max="200" step="0.01">
+                </div>
+            </div>
+
+            <!-- 数值差模式设置 -->
+            <div id="absolute-settings" style="display: none;">
+                <div class="setting-item">
+                    <label for="threshold-asian-absolute">让球数值差:</label>
+                    <input type="number" id="threshold-asian-absolute" value="0.10" min="0.01" max="1.0" step="0.01">
+                </div>
+                <div class="setting-item">
+                    <label for="threshold-over-absolute">大球数值差:</label>
+                    <input type="number" id="threshold-over-absolute" value="0.10" min="0.01" max="1.0" step="0.01">
+                </div>
+                <div class="setting-item">
+                    <label for="threshold-under-absolute">小球数值差:</label>
+                    <input type="number" id="threshold-under-absolute" value="0.10" min="0.01" max="1.0" step="0.01">
+                </div>
+            </div>
+
+            <!-- 刷新间隔 -->
+            <div class="setting-item">
+                <label for="refresh-interval">刷新间隔 (秒):</label>
+                <select id="refresh-interval">
+                    <option value="3">3秒</option>
+                    <option value="5" selected>5秒</option>
+                    <option value="10">10秒</option>
+                    <option value="30">30秒</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
